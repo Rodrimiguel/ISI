@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Instituto1.Data;
 using Instituto1.Models;
+using Instituto1.ViewModels;
 
 namespace Instituto1.Controllers
 {
@@ -20,9 +21,25 @@ namespace Instituto1.Controllers
         }
 
         // GET: Curso
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string NameFilter)
         {
-            return View(await _context.Curso.ToListAsync());
+            var query = from curso in _context.Curso select curso;
+
+            if (!string.IsNullOrEmpty(NameFilter))
+            {
+                query = query.Where(x => x.Name.ToLower().Contains(NameFilter.ToLower())
+                || x.Duration.ToLower().Contains(NameFilter.ToLower()) 
+                || x.Price.ToString().Contains(NameFilter));
+            }
+
+            var queryR = await query.ToListAsync();
+
+            var viewModel = new CursoViewModel();
+            viewModel.Cursos = queryR;
+
+            return _context.Curso != null ?
+                        View(viewModel) :
+                        Problem("Entity set 'CursoContext.Curso'  is null.");
         }
 
         // GET: Curso/Details/5
