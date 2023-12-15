@@ -26,6 +26,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Rodrigo\Desktop\Proyects-001\NuevoProyectoFinal\Instituto1
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Rodrigo/Desktop/Proyects-001/NuevoProyectoFinal/Instituto1/Views/Alumno/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rodrigo/Desktop/Proyects-001/NuevoProyectoFinal/Instituto1/Views/Alumno/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rodrigo/Desktop/Proyects-001/NuevoProyectoFinal/Instituto1/Views/Alumno/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rodrigo/Desktop/Proyects-001/NuevoProyectoFinal/Instituto1/Views/Alumno/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rodrigo/Desktop/Proyects-001/NuevoProyectoFinal/Instituto1/Views/Alumno/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWx1bW5vXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Rodrigo/Desktop/Proyects-001/NuevoProyectoFinal/Instituto1/Views/Curso/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
