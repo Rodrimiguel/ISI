@@ -1,12 +1,23 @@
-@model IEnumerable<Instituto1.Models.Curso>
+@using Instituto1.ViewModels;
+
+@model CursoViewModel;
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Cursos</h1>
-
-
+<br>
+<div class="row">
+    <form method="get" asp-action="Index" asp-controller="Curso">
+        <div>
+            <input class="form-control" asp-for="NameFilter">
+        </div>
+        <button class="btn" type="submit">Buscar</button>
+    </form>
+</div>
+<br>
+<br>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -15,19 +26,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Cursos[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Duration)
+                @Html.DisplayNameFor(model => model.Cursos[0].Duration)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Cursos[0].Price)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Cursos) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

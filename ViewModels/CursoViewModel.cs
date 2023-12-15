@@ -1,6 +1,6 @@
 using Instituto1.Models;
 
-namespace Instituto1.ViewModels;
+namespace  Instituto1.ViewModels;
 
 public class CursoViewModel {
 
