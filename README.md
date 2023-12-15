@@ -1,4 +1,5 @@
-<h1 align="center"> Instituto Superior de Informática (ISI) - Encuentre su mejor Curso </h1>
+<h1 align="center"> Instituto Superior de Informática (ISI)</h1>
+<h1 align="center"> Encuentre su mejor Curso </h1>
 
 ![Imagen/Instituto/Portada](https://www.grupoioe.es/wp-content/uploads/2019/10/informatica-2.jpg)
 
