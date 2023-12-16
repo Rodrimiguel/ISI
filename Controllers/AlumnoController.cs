@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Instituto1.Data;
 using Instituto1.Models;
+using Instituto1.ViewModels;
 
 namespace Instituto1.Controllers
 {

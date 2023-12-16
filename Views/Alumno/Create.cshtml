@@ -1,7 +1,8 @@
-@model Instituto1.Models.Alumno
+@model Instituto1.ViewModels.AlumnoViewModel
 
 @{
     ViewData["Title"] = "Create";
+    SelectList cursoList = (SelectList)ViewData["Cursos"];
 }
 
 <h1>Create</h1>
