@@ -38,7 +38,6 @@ namespace Instituto1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CursoSeleccionado")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Dni")

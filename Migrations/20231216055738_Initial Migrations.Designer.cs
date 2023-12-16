@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Instituto1.Migrations
 {
     [DbContext(typeof(CursoContext))]
-    [Migration("20231216043717_Initial Update")]
-    partial class InitialUpdate
+    [Migration("20231216055738_Initial Migrations")]
+    partial class InitialMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,6 @@ namespace Instituto1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CursoSeleccionado")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Dni")

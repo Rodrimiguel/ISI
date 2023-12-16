@@ -5,7 +5,7 @@
 namespace Instituto1.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialUpdate : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace Instituto1.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Dni = table.Column<string>(type: "TEXT", nullable: false),
-                    CursoSeleccionado = table.Column<string>(type: "TEXT", nullable: false)
+                    CursoSeleccionado = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
