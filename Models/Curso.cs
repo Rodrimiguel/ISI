@@ -15,5 +15,8 @@ public class Curso
     [Display(Name = "Precio")]
     public double Price { get; set; }
 
+    [Display(Name = "Créditos")]
+    public int Credits { get; set; }
+
     public virtual List<Alumno>? Alumnos { get; set; }
 }
