@@ -16,7 +16,7 @@ public class Alumno
     public string Dni { get; set; }
 
     [Display(Name = "Curso Seleccionado")]
-    public string CursoSeleccionado { get; set; }
+    public string? CursoSeleccionado { get; set; }
 
     public virtual List<Curso>? Cursos { get; set; }
 }
