@@ -25,6 +25,7 @@ public class UsersController : Controller
         _roleManager = roleManager;
     }
 
+    [Authorize(Roles = "Profesor, Administrador")]
     public IActionResult Index()
     {
         //listar todos los usuarios
@@ -32,7 +33,7 @@ public class UsersController : Controller
         return View(users);
     }
 
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> Edit(string id)
     {
         var user = await _userManager.FindByIdAsync(id);

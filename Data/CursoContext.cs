@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Instituto1.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Instituto1.Data
 {
-    public class CursoContext : DbContext
+    public class CursoContext : IdentityDbContext
     {
         public CursoContext (DbContextOptions<CursoContext> options)
             : base(options)
