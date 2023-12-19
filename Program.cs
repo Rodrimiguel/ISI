@@ -8,6 +8,12 @@ builder.Services.AddDbContext<CursoContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("CursoContext") ?? throw new InvalidOperationException("Connection string 'CursoContext' not found.")));
 
 // Add services to the container.
+
+//builder.Services.AddDefaultIdentity<IdentityUser>()
+//   .AddRoles<IdentityRole>()
+//    .AddEntityFrameworkStores<CursoContext>();
+//builder.Services.AddControllersWithViews();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICursoServices, CursoServices>();
@@ -33,5 +39,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
