@@ -23,7 +23,7 @@ AÑO : << 2023 >>
 ![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) https://github.com/Rodrimiguel <br>
 
 ##  - DESCRIPCIÓN DEL PROYECTO -
-Academia o instuto para todas las personas que quieran introducirse en el mundo de la informática; a través de asignaturas/materias que se pueden cursar tanto en forma online y/o presencial. Por el momento el proyecto se encuentra en estado base; por lo cual estamos focalizados
+Academia o instituto para todas las personas que quieran introducirse en el mundo de la informática; a través de asignaturas/materias que se pueden cursar tanto en forma online y/o presencial. Por el momento el proyecto se encuentra en estado base; por lo cual estamos focalizados
 en que un alumno pueda asistir a varios cursos. Además de disponer del nombre, precio y duración de cada materia, la misma tiene una valoración en créditos que serán sumados para que en un futuro ese alumno tenga beneficios/descuentos sobre otros cursos. Por el momento estamos en la parte base y segueremos desarrollando para introducir más propiedades en el corto/mediano plazo.
 
 ## - ESTADO DEL PROYECTO -
