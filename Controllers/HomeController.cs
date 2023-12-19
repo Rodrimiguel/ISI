@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Instituto1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Instituto1.Controllers;
 

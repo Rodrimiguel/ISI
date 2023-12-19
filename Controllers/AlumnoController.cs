@@ -9,6 +9,7 @@ using Instituto1.Data;
 using Instituto1.Models;
 using Instituto1.ViewModels;
 using Instituto1.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Instituto1.Controllers
 {
