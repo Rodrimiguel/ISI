@@ -48,7 +48,7 @@ namespace Instituto1.Controllers
             model.Name = alumno.Name;
             model.LastName = alumno.LastName;
             model.Dni = alumno.Dni;
-            model.CursoSeleccionado = alumno.CursoSeleccionado;
+            //model.CursoSeleccionado = alumno.CursoSeleccionado;
 
             return View(alumno);
         }

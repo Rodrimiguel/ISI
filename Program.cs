@@ -13,7 +13,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICursoServices, CursoServices>();
 builder.Services.AddScoped<IAlumnoServices, AlumnoServices>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -33,6 +33,10 @@
                 <input asp-for="CursoSeleccionado" class="form-control" />
                 <span asp-validation-for="CursoSeleccionado" class="text-danger"></span>
             </div>
+
+            <select class="form-control w-50 dropdown" multiple asp-for="CursoIds" asp-items="cursoList" placeholder="Seleccione cursos">
+            </select>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
