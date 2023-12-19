@@ -1,12 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Instituto1.Data;
+using Instituto1.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CursoContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("CursoContext") ?? throw new InvalidOperationException("Connection string 'CursoContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ICursoServices, CursoServices>();
 
 var app = builder.Build();
 
