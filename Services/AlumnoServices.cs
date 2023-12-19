@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Instituto1.Services;
 
-public class AlumnoService : IAlumnoServices
+public class AlumnoServices : IAlumnoServices
 {
     private readonly CursoContext _context;
 
-    public AlumnoService(CursoContext context)
+    public AlumnoServices(CursoContext context)
     {
         _context = context;
     }

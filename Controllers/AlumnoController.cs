@@ -14,19 +14,20 @@ namespace Instituto1.Controllers
 {
     public class AlumnoController : Controller
     {
-        private IAlumnoServices _alumnoService;  
-        private ICursoServices _CursoServices;
+        private IAlumnoServices _alumnoServices;  
+        private ICursoServices _cursoServices;
 
         public AlumnoController(IAlumnoServices estudianteService, ICursoServices cursoService)
         {
-            _alumnoService = estudianteService;
+            _alumnoServices = estudianteService;
             _cursoServices = cursoService;
+        }
 
         // GET: Alumno
-        public IActionResult Index()
+        public IActionResult Index(string nameFilter)
         {
             var model = new AlumnoViewModel();
-            model.Alumnos = _alumnoService.GetAll(nameFilter);
+            model.Alumnos = _alumnoServices.GetAll(nameFilter);
             return View(model);
         }
 
@@ -38,18 +39,25 @@ namespace Instituto1.Controllers
                 return NotFound();
             }
 
-            var alumno = _alumnoService.GetById(id.Value);
+            var alumno = _alumnoServices.GetById(id.Value);
             if (alumno == null)
             {
                 return NotFound();
             }
+            var model = new Alumno();
+            model.Name = alumno.Name;
+            model.LastName = alumno.LastName;
+            model.Dni = alumno.Dni;
+            model.CursoSeleccionado = alumno.CursoSeleccionado;
 
             return View(alumno);
         }
 
         // GET: Alumno/Create
         public IActionResult Create()
-        {
+        {   
+            var cursosList  = _cursoServices.GetAll();
+            ViewData["Cursos"] = new SelectList(cursosList, "Id", "Name");
             return View();
         }
 
@@ -62,8 +70,7 @@ namespace Instituto1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(alumno);
-                await _context.SaveChangesAsync();
+                _alumnoServices.Create(alumno);
                 return RedirectToAction(nameof(Index));
             }
             return View(alumno);
@@ -77,7 +84,7 @@ namespace Instituto1.Controllers
                 return NotFound();
             }
 
-            var alumno = await _context.Alumno.FindAsync(id);
+            var alumno = _alumnoServices.GetById(id.Value);
             if (alumno == null)
             {
                 return NotFound();
@@ -92,31 +99,17 @@ namespace Instituto1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
         {
-            if (id != alumno.Id)
+              if (id != alumno.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(alumno);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AlumnoExists(alumno.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _alumnoServices.Update(alumno);
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(alumno);
         }
 
@@ -128,8 +121,7 @@ namespace Instituto1.Controllers
                 return NotFound();
             }
 
-            var alumno = await _context.Alumno
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var alumno = _alumnoServices.GetById(id.Value);
             if (alumno == null)
             {
                 return NotFound();
@@ -143,19 +135,17 @@ namespace Instituto1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var alumno = await _context.Alumno.FindAsync(id);
-            if (alumno != null)
+            var estudiante = _alumnoServices.GetById(id);
+            if (estudiante != null)
             {
-                _context.Alumno.Remove(alumno);
+                _alumnoServices.Delete(estudiante);
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AlumnoExists(int id)
+        private bool EstudianteExists(int id)
         {
-            return _context.Alumno.Any(e => e.Id == id);
+          return _alumnoServices.GetById(id) != null;
         }
     }
 }
