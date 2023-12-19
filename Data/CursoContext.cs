@@ -23,6 +23,9 @@ namespace Instituto1.Data
             .HasMany(p => p.Alumnos)
             .WithMany(p => p.Cursos)
             .UsingEntity("CursoAlumno");
+        
+            base.OnModelCreating(modelBuilder);
+        
         }
 
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Instituto1.Data;
 using Instituto1.Models;
 using Instituto1.ViewModels;
+using Instituto1.Services;
 
 namespace Instituto1.Controllers
 {
