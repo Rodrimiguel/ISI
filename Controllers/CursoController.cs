@@ -8,56 +8,47 @@ using Microsoft.EntityFrameworkCore;
 using Instituto1.Data;
 using Instituto1.Models;
 using Instituto1.ViewModels;
+using Instituto1.Services;
 
 namespace Instituto1.Controllers
 {
     public class CursoController : Controller
     {
-        private readonly CursoContext _context;
+        private readonly ICursoServices _cursoServices;
 
-        public CursoController(CursoContext context)
+        public CursoController(ICursoServices cursoService)
         {
-            _context = context;
+             _cursoServices = cursoService;
         }
 
         // GET: Curso
-        public async Task<IActionResult> Index(string NameFilter)
+        public IActionResult Index(string nameFilter)
         {
-            var query = from curso in _context.Curso select curso;
-
-            if (!string.IsNullOrEmpty(NameFilter))
-            {
-                query = query.Where(x => x.Name.ToLower().Contains(NameFilter.ToLower())
-                || x.Duration.ToLower().Contains(NameFilter.ToLower()) 
-                || x.Price.ToString().Contains(NameFilter));
-            }
-
-            var queryR = await query.ToListAsync();
-
-            var viewModel = new CursoViewModel();
-            viewModel.Cursos = queryR;
-
-            return _context.Curso != null ?
-                        View(viewModel) :
-                        Problem("Entity set 'CursoContext.Curso'  is null.");
+            var model = new CursoViewModel();
+            model.Cursos = _cursoServices.GetAll(nameFilter);
+            return View(model);
         }
-
+        
         // GET: Curso/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var curso = await _context.Curso
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var curso = _cursoServices.GetById (id.Value);
             if (curso == null)
             {
                 return NotFound();
             }
+            var model = new Curso();
+            model.Name = curso.Name;
+            model.Duration = curso.Duration;
+            model.Price = curso.Price;
+            model.Credits = curso.Credits;
 
-            return View(curso);
+            return View(model);
         }
 
         // GET: Curso/Create
@@ -71,26 +62,25 @@ namespace Instituto1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Duration,Price,Credits")] Curso curso)
+        public IActionResult Create([Bind("Id,Name,Duration,Price,Credits")] Curso curso)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(curso);
-                await _context.SaveChangesAsync();
+                _cursoServices.Create(curso);
                 return RedirectToAction(nameof(Index));
             }
             return View(curso);
         }
 
         // GET: Curso/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var curso = await _context.Curso.FindAsync(id);
+            var curso = _cursoServices.GetById(id.Value);
             if (curso == null)
             {
                 return NotFound();
@@ -103,7 +93,7 @@ namespace Instituto1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Duration,Price,Credits")] Curso curso)
+        public IActionResult Edit(int id, [Bind("Id,Name,Duration,Price,Credits")] Curso curso)
         {
             if (id != curso.Id)
             {
@@ -114,8 +104,7 @@ namespace Instituto1.Controllers
             {
                 try
                 {
-                    _context.Update(curso);
-                    await _context.SaveChangesAsync();
+                    _cursoServices.Update(curso);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -134,15 +123,14 @@ namespace Instituto1.Controllers
         }
 
         // GET: Curso/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var curso = await _context.Curso
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var curso = _cursoServices.GetById(id.Value);
             if (curso == null)
             {
                 return NotFound();
@@ -154,21 +142,15 @@ namespace Instituto1.Controllers
         // POST: Curso/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var curso = await _context.Curso.FindAsync(id);
-            if (curso != null)
-            {
-                _context.Curso.Remove(curso);
-            }
-
-            await _context.SaveChangesAsync();
+            _cursoServices.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool CursoExists(int id)
         {
-            return _context.Curso.Any(e => e.Id == id);
+          return _cursoServices.GetById(id) != null;
         }
     }
 }

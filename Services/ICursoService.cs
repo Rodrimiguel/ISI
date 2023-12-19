@@ -1,6 +1,6 @@
 using Instituto1.Models;
 
-namespace Instituo1.Services;
+namespace Instituto1.Services;
 
 public interface ICursoServices
 {
