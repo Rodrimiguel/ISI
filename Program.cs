@@ -11,6 +11,8 @@ builder.Services.AddDbContext<CursoContext>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICursoServices, CursoServices>();
+builder.Services.AddScoped<IAlumnoServices, AlumnoServices>();
+
 
 var app = builder.Build();
 

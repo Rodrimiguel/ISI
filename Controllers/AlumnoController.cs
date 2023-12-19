@@ -14,29 +14,31 @@ namespace Instituto1.Controllers
 {
     public class AlumnoController : Controller
     {
-        private readonly CursoContext _context;
+        private IAlumnoServices _alumnoService;  
+        private ICursoServices _CursoServices;
 
-        public AlumnoController(CursoContext context)
+        public AlumnoController(IAlumnoServices estudianteService, ICursoServices cursoService)
         {
-            _context = context;
-        }
+            _alumnoService = estudianteService;
+            _cursoServices = cursoService;
 
         // GET: Alumno
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Alumno.ToListAsync());
+            var model = new AlumnoViewModel();
+            model.Alumnos = _alumnoService.GetAll(nameFilter);
+            return View(model);
         }
 
         // GET: Alumno/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var alumno = await _context.Alumno
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var alumno = _alumnoService.GetById(id.Value);
             if (alumno == null)
             {
                 return NotFound();
@@ -56,7 +58,7 @@ namespace Instituto1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
+        public IActionResult Create([Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +70,7 @@ namespace Instituto1.Controllers
         }
 
         // GET: Alumno/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -88,7 +90,7 @@ namespace Instituto1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
+        public IActionResult Edit(int id, [Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
         {
             if (id != alumno.Id)
             {
@@ -119,7 +121,7 @@ namespace Instituto1.Controllers
         }
 
         // GET: Alumno/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -139,7 +141,7 @@ namespace Instituto1.Controllers
         // POST: Alumno/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             var alumno = await _context.Alumno.FindAsync(id);
             if (alumno != null)
