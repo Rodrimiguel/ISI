@@ -43,7 +43,6 @@ public class CursoServices : ICursoServices
         {
             query = query.Where(x => x.Name.ToLower().Contains(filter.ToLower())
                 || x.Duration.ToLower().Contains(filter.ToLower()) 
-                || x.Price.ToString().Contains(filter)
                 || x.Price.ToString().Contains(filter) 
                 || x.Credits.ToString().Contains(filter));              
         }

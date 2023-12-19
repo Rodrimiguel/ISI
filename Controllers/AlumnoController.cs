@@ -17,9 +17,9 @@ namespace Instituto1.Controllers
         private IAlumnoServices _alumnoServices;  
         private ICursoServices _cursoServices;
 
-        public AlumnoController(IAlumnoServices estudianteService, ICursoServices cursoService)
+        public AlumnoController(IAlumnoServices alumnoService, ICursoServices cursoService)
         {
-            _alumnoServices = estudianteService;
+            _alumnoServices = alumnoService;
             _cursoServices = cursoService;
         }
 
@@ -44,10 +44,10 @@ namespace Instituto1.Controllers
             {
                 return NotFound();
             }
-            var model = new Alumno();
-            model.Name = alumno.Name;
-            model.LastName = alumno.LastName;
-            model.Dni = alumno.Dni;
+            //var model = new Alumno();
+            //model.Name = alumno.Name;
+            //model.LastName = alumno.LastName;
+            //model.Dni = alumno.Dni;
             //model.CursoSeleccionado = alumno.CursoSeleccionado;
 
             return View(alumno);

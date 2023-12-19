@@ -47,7 +47,7 @@ namespace Instituto1.Controllers
             model.Duration = curso.Duration;
             model.Price = curso.Price;
             model.Credits = curso.Credits;
-            model.Alumnos = curso.Alumnos;
+            //model.Alumnos = curso.Alumnos;
 
             return View(model);
         }
