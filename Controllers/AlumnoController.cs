@@ -66,7 +66,7 @@ namespace Instituto1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
+        public IActionResult Create([Bind("Id,Name,LastName,Dni,CursoSeleccionado,CursoIds")] Alumno alumno)
         {
             if (ModelState.IsValid)
             {

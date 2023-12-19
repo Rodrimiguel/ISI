@@ -13,7 +13,7 @@ public class AlumnoViewModel {
     public virtual List<CursoViewModel>? Cursos { get;set; }
     public List<Alumno> Alumnos {get;set;} = new List<Alumno>();
     public List<int>? CursoIds { get;set; }
-    public string NameFilter {get;set;}
+    public string? NameFilter {get;set;}
 
 
 }
