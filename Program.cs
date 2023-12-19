@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Instituto1.Data;
 using Instituto1.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CursoContext>(options =>
@@ -9,10 +10,10 @@ builder.Services.AddDbContext<CursoContext>(options =>
 
 // Add services to the container.
 
-//builder.Services.AddDefaultIdentity<IdentityUser>()
-//   .AddRoles<IdentityRole>()
-//    .AddEntityFrameworkStores<CursoContext>();
-//builder.Services.AddControllersWithViews();
+builder.Services.AddDefaultIdentity<IdentityUser>()
+   .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<CursoContext>();
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllersWithViews();
 
