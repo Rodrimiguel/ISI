@@ -14,7 +14,7 @@ namespace Instituto1.Controllers
 {
     public class AlumnoController : Controller
     {
-        private IAlumnoServices _alumnoServices;  
+        private IAlumnoServices _alumnoServices;
         private ICursoServices _cursoServices;
 
         public AlumnoController(IAlumnoServices alumnoService, ICursoServices cursoService)
@@ -44,19 +44,19 @@ namespace Instituto1.Controllers
             {
                 return NotFound();
             }
-            //var model = new Alumno();
-            //model.Name = alumno.Name;
-            //model.LastName = alumno.LastName;
-            //model.Dni = alumno.Dni;
-            //model.CursoSeleccionado = alumno.CursoSeleccionado;
+            var model = new Alumno();
+            model.Name = alumno.Name;
+            model.LastName = alumno.LastName;
+            model.Dni = alumno.Dni;
+            model.CursoSeleccionado = alumno.CursoSeleccionado;
 
             return View(alumno);
         }
 
         // GET: Alumno/Create
         public IActionResult Create()
-        {   
-            var cursosList  = _cursoServices.GetAll();
+        {
+            var cursosList = _cursoServices.GetAll();
             ViewData["Cursos"] = new SelectList(cursosList, "Id", "Name");
             return View();
         }
@@ -66,14 +66,29 @@ namespace Instituto1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,LastName,Dni,CursoSeleccionado,CursoIds")] Alumno alumno)
+        public IActionResult Create([Bind("Id,Name,LastName,Dni,CursoSeleccionado,CursoIds")] AlumnoViewModel alumnoView)
         {
             if (ModelState.IsValid)
             {
-                _alumnoServices.Create(alumno);
-                return RedirectToAction(nameof(Index));
+                var cursos = _cursoServices.GetAll().Where(x => alumnoView.CursoIds.Contains(x.Id)).ToList();
+                //_alumnoServices.Create(alumno);
+                //return RedirectToAction(nameof(Index));
             }
-            return View(alumno);
+            var alumno = new Alumno
+            {
+                Name = alumnoView.Name,
+                LastName = alumnoView.LastName,
+                Dni = alumnoView.Dni,
+                //Cursos = cursos
+            };
+
+            _alumnoServices.Create(alumno);
+
+            return RedirectToAction(nameof(Index));
+
+
+
+            //return View(alumno);
         }
 
         // GET: Alumno/Edit/5
@@ -99,7 +114,7 @@ namespace Instituto1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Name,LastName,Dni,CursoSeleccionado")] Alumno alumno)
         {
-              if (id != alumno.Id)
+            if (id != alumno.Id)
             {
                 return NotFound();
             }
@@ -109,7 +124,7 @@ namespace Instituto1.Controllers
                 _alumnoServices.Update(alumno);
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(alumno);
         }
 
@@ -145,7 +160,7 @@ namespace Instituto1.Controllers
 
         private bool EstudianteExists(int id)
         {
-          return _alumnoServices.GetById(id) != null;
+            return _alumnoServices.GetById(id) != null;
         }
     }
 }
